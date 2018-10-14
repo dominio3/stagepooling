@@ -1,0 +1,248 @@
+---------------------------------------------------------------------------------------
+		MIGRACIONES https://laravel.com/docs/5.4/migrations
+---------------------------------------------------------------------------------------
+configuro el .env con mi bd
+
+Luego hacemos la magia:
+php artisan infyom:api_scaffold MODEL_SINGULAR --fromTable --tableName=nombre_tabla --save
+
+creamos la migration : php artisan make:migration nombre_migracion
+
+agregamos timestamps a las tablas
+
+class Timestamps extends Migration
+{
+ 
+   public function up()
+    
+{
+
+        Schema::table('nombre_tabla' , function( Blueprint $table ){
+
+          $table->timestamps();
+          
+	  $table->timestamp('deleted_at')->nullable();
+
+        });
+    
+}
+
+ejecutamos : php artisan migrate
+si es necesario eliminar migracion de user y password luego de su migracion.
+
+acomodamos todas variables de configuracion de vendor a nuestro proyecto para que se vea el datatable.
+php artisan vendor:publish --tag=datatables-buttons
+
+-----------------------------------------------------------------------------------
+		Que debemos cambiar para que todo funcione?
+-----------------------------------------------------------------------------------
+
+				En Modelo : 
+
+Rules para validar que los campos no queden vacios : 
+
+    public static $rules = [
+
+        'nombre' => 'required',
+
+        'id_instituto' => 'required'
+
+    ];
+
+
+definicion de Relaciones con belongTo ( trae toda la coleccion de datos de la tabla user para cargar un select , si la FK no es igual a tabla_id debe aclararse como segundo parametro)
+
+public function userSus()
+
+    {
+        return $this->belongsTo(\App\Models\User::class , 'usuarioSustanciacion');
+    }
+
+    public function userCie()
+    {
+        return $this->belongsTo(\App\Models\User::class , 'usuarioCierre');
+    }
+
+definicion de Relaciones con belongTo ( 
+
+    public function jurados()
+    
+{
+        return $this->belongsToMany(\App\Models\Jurado::class, 'concursosjurados');
+
+
+
+				En el Controlador :
+
+
+//retorno de variable con compact('variable')  para enviar el pluck('Campo' , 'PK') para cargar el select
+
+    public function create()
+
+    {
+
+        $institutos = \App\Models\Instituto::pluck('nombre' , 'id');
+
+        return view('carreras.create' , compact('institutos'));
+
+    }
+    public function edit($id)
+    
+    {
+        
+	$institutos = Instituto::pluck('nombre' , 'id') ;
+
+        
+	$carrera = $this->carreraRepository->findWithoutFail($id);
+
+        
+	if (empty($carrera)) {
+            
+	Flash::error('Carrera not found');
+
+            
+	return redirect(route('carreras.index', compact('institutos')));
+        
+	}
+
+        
+	return view('carreras.edit' , compact('institutos'))->with('carrera', $carrera);
+    
+}
+
+				En las vistas
+
+En fields.blade.php 
+
+<div class="form-group col-sm-6">
+
+    {!! Form::label('id_instituto', 'Id Instituto:') !!}
+
+    {!! Form::select('id_instituto', $institutos , null, ['class' => 'form-control', 'placeholder'=> 'Por Favor Seleccione Instituto']) !!}
+
+</div>
+
+
+En show_fields.blade.php depende de lo que declaro en el Models BelongTo  , hasMany o HasOne( recordar que tiene poner el metodo en plura finaliza en s )
+
+
+<!-- Instituto Id Field -->
+<div class="form-group">
+
+    {!! Form::label('instituto_id', 'Instituto Id:') !!}
+
+    <p>{!! $carrera->instituto->nombre !!}</p>
+</div>
+
+tambien se pueden poner muchos parametros de las tablas que traen las FK .
+ej.
+<!-- Concurso Id Field -->
+<div class="form-group">
+
+    {!! Form::label('concurso_id', 'Concurso Id:') !!}
+
+    <p>
+    Identificador  : {!! $concursoPostulante->concurso_id !!} <br>
+
+    Refencia General : {!! $concursoPostulante->concurso->referenciaGeneral !!} <br>
+
+    Asignatura : {!! $concursoPostulante->concurso->asignatura->nombre !!} <br>
+
+    Area : {!! $concursoPostulante->concurso->asignatura->area->nombre !!} <br>
+
+    Estado del Concurso : {!! $concursoPostulante->concurso->estado !!}
+    
+</p>
+</div>
+
+
+
+Cómo personalizar el correo de recuperación de contraseñas en Laravel 5.3 y 5.4
+
+https://styde.net/como-personalizar-el-correo-de-recuperacion-de-contrasenas-en-laravel-5-3-y-5-4/
+
+solucionar puerto y url de redireccion 
+
+https://stackoverflow.com/questions/44880486/replace-localhost-with-real-domain-name-in-reset-password-of-laravel-5
+
+
+Excepciones :
+
+Laravel forgot Password 1/1) Swift_TransportException
+ Solucion :
+php artisan config:cache
+php artisan cache:clear
+php artisan config:clear
+
+
+
+https://rimorsoft.com/generar-reportes-pdf-en-laravel-5-5
+
+
+-----------------------------------------------------------------------------------------------------------------
+				RELACIONES EN DATATABLES QUERY()->JOIN()->SELECT
+-----------------------------------------------------------------------------------------------------------------
+TABLA1 = LA TABLA QUE TIENE LA FK 
+TABLA2 = LA TABLA QUE TIENE LA PK
+
+
+$VARIABLE = MODELO::query()->JOIN('TABLA2','TABLA1.FK','=','TABLA2.id')->SELECT('TABLA1.id' , 'TABLA1.CAMPO AS ALIAS' , 'TABLA2.CAMPO AS ALIAS');
+
+
+private function getColumns()
+ 
+	{
+
+        
+		return [
+            
+		'CABECERATABLA1' => ['name' => 'TABLA1.CAMPO', 'data' => 'ALIAS'],
+            	'CABECERATABLA2' => ['name' => 'TABLA2.CAMPO', 'data' => 'ALIAS' 
+		]
+
+
+];
+
+       }
+
+
+EJEMPLO:
+  public function query()
+    
+	{
+        
+		$carreras = Carrera::query()->join('institutos','carreras.instituto_id','=','institutos.id')
+			  
+                  ->select(['carreras.id' , 'carreras.nombre as carr_nom', 'institutos.nombre as ins_nom']);
+	
+
+        return $this->applyScopes($carreras);
+    
+	}
+
+    
+
+ 	/*$posts = DB::table('posts')->join('users', 'posts.user_id', '=', 'users.id')
+            
+			->select(['posts.id', 'posts.title', 'users.name', 'users.email', 'posts.created_at', 'posts.updated_at']);*/
+
+
+
+    private function getColumns()
+    
+	{
+
+        
+		return [
+            
+		'Carrera' => ['name' => 'carreras.nombre', 'data' => 'carr_nom'],
+            	'Instituto' => ['name' => 'institutos.nombre', 'data' => 'ins_nom']
+
+
+
+		];
+
+       }
+
+
+

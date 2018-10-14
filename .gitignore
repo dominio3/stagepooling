@@ -1,0 +1,11 @@
+/node_modules
+/storage/*.key
+/vendor
+/.idea
+/.vagrant
+Homestead.json
+Homestead.yaml
+npm-debug.log
+.env
+/.env
+/_ide_helper.php
