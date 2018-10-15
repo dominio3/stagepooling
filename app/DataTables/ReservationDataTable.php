@@ -27,7 +27,23 @@ class ReservationDataTable extends DataTable
      */
     public function query()
     {
-        $reservations = Reservation::query();
+        $reservations = Reservation::query()
+                ->join('parkings' , 'reservations.parkings_id' , '=' , 'parkings.id')
+                ->join('vehicules' , 'reservations.vehicules_id' , '=' , 'vehicules.id')
+                ->join('stages' , 'parkings.stages_id' , '=' , 'reservations.id')
+                ->select('parkings.parking_code as parkings_code' ,
+                         'parkings.date_init as date_init',
+                         'parkings.hour_init as hour_init',
+                         'parkings.date_end as date_end',
+                         'parkings.hour_end as hour_end',
+                         'stages.name as stage_name',
+                         'stages.locality as stage_locality',
+                         'stages.address as stage_address',
+                         'vehicules.patent as vehicules_patent',
+                         'reservations.id','reservations.reservation_code as reservation_code',
+                         'reservations.id','reservations.state as state'
+
+                       );//->where('users_id','=!',Auth::user()->id);
 
         return $this->applyScopes($reservations);
     }
@@ -72,9 +88,16 @@ class ReservationDataTable extends DataTable
     private function getColumns()
     {
         return [
+            'Locality' => ['name' => 'stage_locality', 'data' => 'stage_locality'],
+            'Address' => ['name' => 'stage_address', 'data' => 'stage_address'],
             'reservation_code' => ['name' => 'reservation_code', 'data' => 'reservation_code'],
-            'parkings_id' => ['name' => 'parkings_id', 'data' => 'parkings_id'],
-            'vehicules_id' => ['name' => 'vehicules_id', 'data' => 'vehicules_id'],
+            'Codigo' => ['name' => 'parkings_id', 'data' => 'parkings_code'],
+            'Date init' => ['name' => 'date_init', 'data' => 'date_init'],
+            'Hora init' => ['name' => 'hour_init', 'data' => 'hour_init'],
+            'Date end' => ['name' => 'date_end', 'data' => 'date_end'],
+            'Hora end' => ['name' => 'hour_end', 'data' => 'hour_end'],
+            'Stage' => ['name' => 'stage_name', 'data' => 'stage_name'],
+            'vehicules_id' => ['name' => 'vehicules_id', 'data' => 'vehicules_patent'],
             'state' => ['name' => 'state', 'data' => 'state']
         ];
     }
