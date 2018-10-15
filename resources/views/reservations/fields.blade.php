@@ -7,7 +7,7 @@
 <!-- Parkings Id Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('parkings_id', 'Parkings Id:') !!}
-    {!! Form::select('parkings_id', $parkings, null, ['class' => 'form-control']) !!}
+    {!! Form::select('parkings_id', $parkings , null, ['id'=>'select-parkings' , 'class' => 'form-control' , 'placeholder' => 'Selecione Parking']) !!}
 </div>
 
 <!-- Vehicules Id Field -->

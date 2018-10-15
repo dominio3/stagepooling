@@ -41,13 +41,13 @@
                         <!-- Menu Toggle Button -->
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                           @php
-                          if(empty(Auth::user()->foto))
+                          if(empty(Auth::user()->photo))
                             {
                               $image = "./uploads/foto/default.jpg";
                             }
                           else
                             {
-                              $image = "./uploads/foto/" . Auth::user()->photo;
+                              $image =  Auth::user()->photo;
                             }
                           @endphp
 

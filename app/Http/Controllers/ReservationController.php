@@ -48,6 +48,7 @@ class ReservationController extends AppBaseController
         $parkings = Parking::pluck('parking_code' , 'id');
         $vehicules = Vehicule::where('users_id','=', Auth::user()->id)->pluck('patent' , 'id');
         $codigo = $this->generarCodigo();
+
         return view('reservations.create')->with(compact('states' , 'parkings' , 'vehicules' , 'codigo'));
     }
 
@@ -177,4 +178,6 @@ class ReservationController extends AppBaseController
         return $cadena;
 
     }
+    //cargar select dinamicamente
+
 }

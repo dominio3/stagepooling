@@ -7,13 +7,14 @@
         <div class="user-panel">
           <div class="pull-left image">
             @php
-            if(empty(Auth::user()->foto))
+            if(empty(Auth::user()->photo))
               {
                 $image = "./uploads/foto/default.jpg";
               }
             else
               {
-                $image = "./uploads/foto/" . Auth::user()->photo;
+                $image =  Auth::user()->photo;
+
               }
             @endphp
               <img src="{{$image}}" class="img-circle"

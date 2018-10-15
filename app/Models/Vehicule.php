@@ -124,4 +124,6 @@ class Vehicule extends Model
     {
         return $this->hasMany(\App\Models\Reservation::class);
     }
+
+
 }
