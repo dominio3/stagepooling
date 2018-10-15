@@ -45,7 +45,7 @@ class UserDataTable extends DataTable
             ->ajax('')
             ->parameters([
                 'dom' => 'Bfrtip',
-                'scrollX' => false,
+                'scrollX' => true,
                 'buttons' => [
                     'print',
                     'reset',
@@ -74,11 +74,11 @@ class UserDataTable extends DataTable
         return [
             'name' => ['name' => 'name', 'data' => 'name'],
             'email' => ['name' => 'email', 'data' => 'email'],
-            'password' => ['name' => 'password', 'data' => 'password'],
-            'remember_token' => ['name' => 'remember_token', 'data' => 'remember_token'],
+            //'password' => ['name' => 'password', 'data' => 'password'],
+            //'remember_token' => ['name' => 'remember_token', 'data' => 'remember_token'],
             'mobile' => ['name' => 'mobile', 'data' => 'mobile'],
             'role' => ['name' => 'role', 'data' => 'role'],
-            'photo' => ['name' => 'photo', 'data' => 'photo']
+            'photo' => ['name' => 'photo', 'data' => 'photo' , 'render' => '"<img src=\""+data+"\" height=\"50\"/>"']
         ];
     }
 

@@ -4,13 +4,13 @@ use App\Models\Parking;
 
 <!-- Paking Code Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('paking_code', 'Paking Code:') !!}
-    {!! Form::text('paking_code', $codigo ,  ['class' => 'form-control']) !!}
+    {!! Form::label('parking_code', 'Paking Code:') !!}
+    {!! Form::text('parking_code', $codigo , ['class' => 'form-control']) !!}
 </div>
 
 <!-- Date Init Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('date_init', 'Date Init:') !!}
+  {!! Form::label('date_init', 'Date Init:') !!}
     {!! Form::date('date_init', $parking->date_init,  ['class' => 'form-control']) !!}
 </div>
 

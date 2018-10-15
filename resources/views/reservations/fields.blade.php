@@ -1,26 +1,26 @@
 <!-- Reservation Code Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('reservation_code', 'Reservation Code:') !!}
-    {!! Form::text('reservation_code', null, ['class' => 'form-control']) !!}
+    {!! Form::text('reservation_code',$codigo ,  ['class' => 'form-control']) !!}
 </div>
 
 <!-- Parkings Id Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('parkings_id', 'Parkings Id:') !!}
-    {!! Form::number('parkings_id', null, ['class' => 'form-control']) !!}
+    {!! Form::select('parkings_id', $parkings, null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Vehicules Id Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('vehicules_id', 'Vehicules Id:') !!}
-    {!! Form::number('vehicules_id', null, ['class' => 'form-control']) !!}
+    {!! Form::select('vehicules_id', $vehicules, null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- State Field -->
-<div class="form-group col-sm-6">
+<!--div class="form-group col-sm-6">
     {!! Form::label('state', 'State:') !!}
-    {!! Form::text('state', null, ['class' => 'form-control']) !!}
-</div>
+    {!! Form::select('state', $states ,  null, ['class' => 'form-control']) !!}
+</div-->
 
 <!-- Submit Field -->
 <div class="form-group col-sm-12">

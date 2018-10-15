@@ -5,6 +5,7 @@ namespace App\DataTables;
 use App\Models\Parking;
 use Form;
 use Yajra\Datatables\Services\DataTable;
+use Illuminate\Support\Facades\Auth;
 
 class ParkingDataTable extends DataTable
 {
@@ -27,7 +28,16 @@ class ParkingDataTable extends DataTable
      */
     public function query()
     {
-        $parkings = Parking::query();
+        $parkings = Parking::query()
+        ->join('stages' , 'parkings.stages_id' , '=' , 'stages.id')
+        ->select('stages.name  as stage_name' ,
+                 'parkings.id','parkings.parking_code as parking_code',
+                 'parkings.id','parkings.date_init as date_init',
+                 'parkings.id','parkings.hour_init as hour_init',
+                 'parkings.id','parkings.date_end as date_end',
+                 'parkings.id','parkings.hour_end as hour_end',
+                 'parkings.id','parkings.state as parking_state'
+                 )->where('users_id','=',Auth::user()->id);
 
         return $this->applyScopes($parkings);
     }
@@ -45,7 +55,7 @@ class ParkingDataTable extends DataTable
             ->ajax('')
             ->parameters([
                 'dom' => 'Bfrtip',
-                'scrollX' => false,
+                'scrollX' => true,
                 'buttons' => [
                     'print',
                     'reset',
@@ -72,13 +82,13 @@ class ParkingDataTable extends DataTable
     private function getColumns()
     {
         return [
-            'paking_code' => ['name' => 'paking_code', 'data' => 'paking_code'],
+            'parking_code' => ['name' => 'parking_code', 'data' => 'parking_code'],
             'date_init' => ['name' => 'date_init', 'data' => 'date_init'],
             'hour_init' => ['name' => 'hour_init', 'data' => 'hour_init'],
             'date_end' => ['name' => 'date_end', 'data' => 'date_end'],
             'hour_end' => ['name' => 'hour_end', 'data' => 'hour_end'],
-            'stages_id' => ['name' => 'stages_id', 'data' => 'stages_id'],
-            'state' => ['name' => 'state', 'data' => 'state']
+            'stages' => ['name' => 'stages_id', 'data' => 'stage_name'],
+            'state' => ['name' => 'state', 'data' => 'parking_state'] //, 'render' => '"<button src=\""+data+"\" value ="+data+"\ height=\"50\">test</button>"']
         ];
     }
 

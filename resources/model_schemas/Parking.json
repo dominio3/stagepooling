@@ -11,7 +11,7 @@
         "inIndex": false
     },
     {
-        "name": "paking_code",
+        "name": "parking_code",
         "dbType": "string",
         "htmlType": "text",
         "validations": null,

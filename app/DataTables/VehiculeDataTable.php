@@ -46,7 +46,7 @@ class VehiculeDataTable extends DataTable
             ->ajax('')
             ->parameters([
                 'dom' => 'Bfrtip',
-                'scrollX' => false,
+                'scrollX' => true,
                 'buttons' => [
                     'print',
                     'reset',
@@ -80,7 +80,7 @@ class VehiculeDataTable extends DataTable
             'color' => ['name' => 'color', 'data' => 'color'],
             'state' => ['name' => 'state', 'data' => 'state'],
             'observation' => ['name' => 'observation', 'data' => 'observation'],
-            'users_id' => ['name' => 'users_id', 'data' => 'users_id']
+            //'users_id' => ['name' => 'users_id', 'data' => 'users_id']
         ];
     }
 

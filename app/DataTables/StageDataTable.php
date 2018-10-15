@@ -46,7 +46,7 @@ class StageDataTable extends DataTable
             ->ajax('')
             ->parameters([
                 'dom' => 'Bfrtip',
-                'scrollX' => false,
+                'scrollX' => true,
                 'buttons' => [
                     'print',
                     'reset',
@@ -83,7 +83,7 @@ class StageDataTable extends DataTable
             'observation' => ['name' => 'observation', 'data' => 'observation'],
             'photo' => ['name' => 'photo', 'data' => 'photo'],
             'state' => ['name' => 'state', 'data' => 'state'],
-            'users_id' => ['name' => 'users_id', 'data' => 'users_id']
+            //'users_id' => ['name' => 'users_id', 'data' => 'users_id']
         ];
     }
 

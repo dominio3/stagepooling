@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>InfyOm Generator</title>
+    <title>StagePooling</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
 
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -24,7 +24,7 @@
 
         <!-- Logo -->
         <a href="#" class="logo">
-            <b>InfyOm</b>
+            <b>StagePooling</b>
         </a>
 
         <!-- Header Navbar -->
@@ -40,8 +40,19 @@
                     <li class="dropdown user user-menu">
                         <!-- Menu Toggle Button -->
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                          @php
+                          if(empty(Auth::user()->foto))
+                            {
+                              $image = "./uploads/foto/default.jpg";
+                            }
+                          else
+                            {
+                              $image = "./uploads/foto/" . Auth::user()->photo;
+                            }
+                          @endphp
+
                             <!-- The user image in the navbar-->
-                            <img src="http://infyom.com/images/logo/blue_logo_150x150.jpg"
+                            <img src="{{$image}}"
                                  class="user-image" alt="User Image"/>
                             <!-- hidden-xs hides the username on small devices so only the image appears. -->
                             <span class="hidden-xs">{!! Auth::user()->name !!}</span>
@@ -49,7 +60,7 @@
                         <ul class="dropdown-menu">
                             <!-- The user image in the menu -->
                             <li class="user-header">
-                                <img src="http://infyom.com/images/logo/blue_logo_150x150.jpg"
+                                <img src="{{$image}}"
                                      class="img-circle" alt="User Image"/>
                                 <p>
                                     {!! Auth::user()->name !!}
@@ -88,7 +99,7 @@
 
     <!-- Main Footer -->
     <footer class="main-footer" style="max-height: 100px;text-align: center">
-        <strong>Copyright © 2016 <a href="http://infyom.com" target="_blank">InfyOm Technologies</a>.</strong> All rights reserved.
+        <strong>Copyright © 2018 <a href="http://infyom.com" target="_blank">Futur@</a>.</strong> All rights reserved.
     </footer>
 
 </div>

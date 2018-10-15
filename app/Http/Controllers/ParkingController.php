@@ -46,7 +46,7 @@ class ParkingController extends AppBaseController
         $stages = Stage::where('users_id','=',Auth::user()->id)->pluck('name' , 'id');
         $codigo = $this->generarCodigo();
         $parking = new Parking();
-        
+
         return view('parkings.create')->with(compact('states' , 'stages' , 'codigo', 'parking'));
     }
 
@@ -79,8 +79,8 @@ class ParkingController extends AppBaseController
     {
         $states = ([ 'Disponible' => 'Disponible' , 'Ocupado' =>'Ocupado' ]);
         $stages = Stage::where('users_id','=',Auth::user()->id)->pluck('name' , 'id');
-        $codigo = $this->generarCodigo();
         $parking = $this->parkingRepository->findWithoutFail($id);
+        $codigo = $parking->codigo;
 
         if (empty($parking)) {
             Flash::error('Parking not found');
@@ -102,8 +102,8 @@ class ParkingController extends AppBaseController
     {
         $states = ([ 'Disponible' => 'Disponible' , 'Ocupado' =>'Ocupado' ]);
         $stages = Stage::where('users_id','=',Auth::user()->id)->pluck('name' , 'id');
-        $codigo = $this->generarCodigo();
         $parking = $this->parkingRepository->findWithoutFail($id);
+        $codigo = $parking->codigo;
 
         if (empty($parking)) {
             Flash::error('Parking not found');

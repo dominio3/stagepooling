@@ -16,8 +16,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *          format="int32"
  *      ),
  *      @SWG\Property(
- *          property="paking_code",
- *          description="paking_code",
+ *          property="parking_code",
+ *          description="parking_code",
  *          type="string"
  *      ),
  *      @SWG\Property(
@@ -59,7 +59,7 @@ class Parking extends Model
 
 
     public $fillable = [
-        'paking_code',
+        'parking_code',
         'date_init',
         'hour_init',
         'date_end',
@@ -75,7 +75,7 @@ class Parking extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'paking_code' => 'string',
+        'parking_code' => 'string',
         'date_init' => 'date',
         'hour_init' => 'time',
         'date_end' => 'date',
@@ -90,7 +90,7 @@ class Parking extends Model
      * @var array
      */
     public static $rules = [
-      'paking_code' => 'required',
+      'parking_code' => 'required',
       'date_init' => 'required',
       'hour_init' =>'required',
       'date_end' => 'required',

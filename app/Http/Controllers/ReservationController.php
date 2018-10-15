@@ -10,6 +10,11 @@ use App\Repositories\ReservationRepository;
 use Flash;
 use App\Http\Controllers\AppBaseController;
 use Response;
+use App\Models\Parking;
+use App\Models\Vehicule;
+use Illuminate\Support\Facades\Auth;
+
+
 
 class ReservationController extends AppBaseController
 {
@@ -39,7 +44,11 @@ class ReservationController extends AppBaseController
      */
     public function create()
     {
-        return view('reservations.create');
+        $states = ([ 'Activa' => 'Activa' , 'Finalizada' =>'Finalizada' ]);
+        $parkings = Parking::pluck('parking_code' , 'id');
+        $vehicules = Vehicule::where('users_id','=', Auth::user()->id)->pluck('patent' , 'id');
+        $codigo = $this->generarCodigo();
+        return view('reservations.create')->with(compact('states' , 'parkings' , 'vehicules' , 'codigo'));
     }
 
     /**
@@ -69,15 +78,18 @@ class ReservationController extends AppBaseController
      */
     public function show($id)
     {
+        $states = ([ 'Activa' => 'Activa' , 'Finalizada' =>'Finalizada' ]);
+        $parkings = Parking::pluck('parking_code' , 'id');
+        $vehicules = Vehicule::where('users_id','=', Auth::user()->id)->pluck('patent' , 'id');
         $reservation = $this->reservationRepository->findWithoutFail($id);
-
+        $codigo = $reservation->codigo;
         if (empty($reservation)) {
             Flash::error('Reservation not found');
 
             return redirect(route('reservations.index'));
         }
 
-        return view('reservations.show')->with('reservation', $reservation);
+        return view('reservations.show')->with('reservation', $reservation)->with(compact('states' , 'parkings' , 'vehicules' , 'codigo'));
     }
 
     /**
@@ -89,15 +101,18 @@ class ReservationController extends AppBaseController
      */
     public function edit($id)
     {
+        $states = ([ 'Activa' => 'Activa' , 'Finalizada' =>'Finalizada' ]);
+        $parkings = Parking::pluck('parking_code' , 'id');
+        $vehicules = Vehicule::where('users_id','=', Auth::user()->id)->pluck('patent' , 'id');
         $reservation = $this->reservationRepository->findWithoutFail($id);
-
+        $codigo = $reservation->codigo;
         if (empty($reservation)) {
             Flash::error('Reservation not found');
 
             return redirect(route('reservations.index'));
         }
 
-        return view('reservations.edit')->with('reservation', $reservation);
+        return view('reservations.edit')->with('reservation', $reservation)->with(compact('states' , 'parkings' , 'vehicules', 'codigo'));
     }
 
     /**
@@ -147,5 +162,19 @@ class ReservationController extends AppBaseController
         Flash::success('Reservation deleted successfully.');
 
         return redirect(route('reservations.index'));
+    }
+
+    public function generarCodigo(){
+
+        $caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890"; //posibles caracteres a usar
+        $numerodeletras=10; //numero de letras para generar el texto
+        $cadena = ""; //variable para almacenar la cadena generada
+        for($i=0;$i<$numerodeletras;$i++)
+        {
+            $cadena .= substr($caracteres,rand(0,strlen($caracteres)),1); /*Extraemos 1 caracter de los caracteres
+        entre el rango 0 a Numero de letras que tiene la cadena */
+        }
+        return $cadena;
+
     }
 }

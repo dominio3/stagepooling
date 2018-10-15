@@ -20,7 +20,7 @@ class ParkingRepository extends BaseRepository
      * @var array
      */
     protected $fieldSearchable = [
-        'paking_code',
+        'parking_code',
         'date_init',
         'hour_init',
         'date_end',

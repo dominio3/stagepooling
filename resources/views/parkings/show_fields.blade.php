@@ -6,8 +6,8 @@
 
 <!-- Paking Code Field -->
 <div class="form-group">
-    {!! Form::label('paking_code', 'Paking Code:') !!}
-    <p>{!! $parking->paking_code !!}</p>
+    {!! Form::label('parking_code', 'Paking Code:') !!}
+    <p>{!! $parking->parking_code !!}</p>
 </div>
 
 <!-- Date Init Field -->

@@ -42,7 +42,7 @@ trait MakeParkingTrait
         $fake = Faker::create();
 
         return array_merge([
-            'paking_code' => $fake->word,
+            'parking_code' => $fake->word,
             'date_init' => $fake->word,
             'hour_init' => $fake->word,
             'date_end' => $fake->word,
