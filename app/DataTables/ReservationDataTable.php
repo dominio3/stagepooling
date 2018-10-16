@@ -38,7 +38,6 @@ class ReservationDataTable extends DataTable
                          'parkings.hour_init as hour_init',
                          'parkings.date_end as date_end',
                          'parkings.hour_end as hour_end'
-
                        );//->where('users_id','=!',Auth::user()->id);
 
         return $this->applyScopes($reservations);
