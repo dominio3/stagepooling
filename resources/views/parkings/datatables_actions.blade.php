@@ -1,5 +1,7 @@
 {!! Form::open(['route' => ['parkings.destroy', $id], 'method' => 'delete']) !!}
 <div class='btn-group'>
+      <button type="button" class="btn btn-default btn-xs dropdown-toggle" ><a href="{{ url('/reservations/create', $id ) }}" />Reserve</button>
+
     <a href="{{ route('parkings.show', $id) }}" class='btn btn-default btn-xs'>
         <i class="glyphicon glyphicon-eye-open"></i>
     </a>
@@ -11,5 +13,8 @@
         'class' => 'btn btn-danger btn-xs',
         'onclick' => "return confirm('Are you sure?')"
     ]) !!}
+
+
+
 </div>
 {!! Form::close() !!}

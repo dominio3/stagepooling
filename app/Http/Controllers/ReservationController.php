@@ -42,14 +42,16 @@ class ReservationController extends AppBaseController
      *
      * @return Response
      */
-    public function create()
+    public function create($p)
     {
+
         $states = ([ 'Activa' => 'Activa' , 'Finalizada' =>'Finalizada' ]);
-        $parkings = Parking::pluck('parking_code' , 'id');
+        //$parkings = Parking::pluck('parking_code' , 'id');
         $vehicules = Vehicule::where('users_id','=', Auth::user()->id)->pluck('patent' , 'id');
         $codigo = $this->generarCodigo();
+        $parking_id =  Parking::find($p);
 
-        return view('reservations.create')->with(compact('states' , 'parkings' , 'vehicules' , 'codigo'));
+        return view('reservations.create')->with(compact('states' , 'parkings' , 'vehicules' , 'codigo' ,'parking_id' ));
     }
 
     /**
@@ -102,6 +104,7 @@ class ReservationController extends AppBaseController
      */
     public function edit($id)
     {
+
         $states = ([ 'Activa' => 'Activa' , 'Finalizada' =>'Finalizada' ]);
         $parkings = Parking::pluck('parking_code' , 'id');
         $vehicules = Vehicule::where('users_id','=', Auth::user()->id)->pluck('patent' , 'id');
@@ -178,6 +181,7 @@ class ReservationController extends AppBaseController
         return $cadena;
 
     }
+
     //cargar select dinamicamente
 
 }

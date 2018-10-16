@@ -31,13 +31,16 @@ class ParkingDataTable extends DataTable
         $parkings = Parking::query()
         ->join('stages' , 'parkings.stages_id' , '=' , 'stages.id')
         ->select('stages.name  as stage_name' ,
+                 'stages.locality  as stage_locality' ,
+                 'stages.address as stage_address',
+                 'stages.province as stage_province',
                  'parkings.id','parkings.parking_code as parking_code',
                  'parkings.id','parkings.date_init as date_init',
                  'parkings.id','parkings.hour_init as hour_init',
                  'parkings.id','parkings.date_end as date_end',
                  'parkings.id','parkings.hour_end as hour_end',
                  'parkings.id','parkings.state as parking_state'
-                 )->where('users_id','=',Auth::user()->id);
+                 )->where('users_id','!=',Auth::user()->id);
 
         return $this->applyScopes($parkings);
     }
@@ -83,6 +86,9 @@ class ParkingDataTable extends DataTable
     {
         return [
             'parking_code' => ['name' => 'parking_code', 'data' => 'parking_code'],
+            'address' => ['name' => 'stage_address', 'data' => 'stage_address'],
+            'province' => ['name' => 'stage_province', 'data' => 'stage_province'],
+            'locality' => ['name' => 'stages_locality', 'data' => 'stage_locality'],
             'date_init' => ['name' => 'date_init', 'data' => 'date_init'],
             'hour_init' => ['name' => 'hour_init', 'data' => 'hour_init'],
             'date_end' => ['name' => 'date_end', 'data' => 'date_end'],
