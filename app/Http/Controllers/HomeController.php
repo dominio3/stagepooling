@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Parking;
 
 class HomeController extends Controller
 {
@@ -15,6 +16,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $parking = Parking::all();
+        return view('home')->with(compact($parking , 'parking'));
     }
+
+
 }

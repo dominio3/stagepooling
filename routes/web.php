@@ -5,6 +5,10 @@ Route::get('/', function () {
   return redirect('home');
 });
 
+Route::get('/maps', function () {
+  return view('maps.maps');
+});
+
 Route::get('/reservations/create/{p}','ReservationController@create');
 
 Auth::routes();

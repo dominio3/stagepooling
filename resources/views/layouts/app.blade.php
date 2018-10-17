@@ -14,6 +14,13 @@
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/skins/square/_all.css">
+
+    <link rel="stylesheet" href="{{ asset('css/maps/styles.css')}}">
+    <script>
+        var map;
+    </script>
+    <script src="{{ asset('js/maps/gmaps.js') }}"></script>
+
     @yield('css')
 </head>
 
@@ -48,6 +55,7 @@
                           else
                             {
                               $image =  Auth::user()->photo;
+                              
                             }
                           @endphp
 

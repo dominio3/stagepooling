@@ -101,7 +101,7 @@ class Parking extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      **/
-    public function stage()
+    public function stages()
     {
         return $this->belongsTo(\App\Models\Stage::class);
     }

@@ -1,3 +1,65 @@
+<!-- API KEY : AIzaSyDUV3uA9XdReJdTxIGQsnTd7BhMrB4RdNk -->
+<!--maps-->
+
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDUV3uA9XdReJdTxIGQsnTd7BhMrB4RdNk&callback=initMap" async
+    defer></script>
+<div id="map"></div>
+
+<script type="text/javascript">
+
+function addMarker(data) {
+    new google.maps.Marker({
+        position: new google.maps.LatLng(data.lat, data.lng),
+        map: map
+    });
+}
+
+
+function initMap()
+{
+    map = new google.maps.Map(document.getElementById('map'), {
+        center: {
+            lat: -34.6157437,
+            lng: -58.5733832,
+        },
+        zoom: 8
+
+    })
+
+        var marker = {
+          lat: <?php  echo $parking->stages->latitude; ?>,
+          lng: <?php  echo $parking->stages->longitude; ?>
+        };
+
+        addMarker(marker);
+
+        var marker = {
+          lat: <?php  echo $parking->stages->latitude; ?>,
+          lng: <?php  echo $parking->stages->longitude; ?>
+        };
+
+        addMarker(marker);
+        var marker = {
+          lat: <?php  echo $parking->stages->latitude; ?>,
+          lng: <?php  echo $parking->stages->longitude; ?>
+        };
+
+        addMarker(marker);
+        var marker = {
+          lat: <?php  echo $parking->stages->latitude; ?>,
+          lng: <?php  echo $parking->stages->longitude; ?>
+        };
+
+        addMarker(marker);
+}
+
+
+</script>
+
+
+<?php  //dd($parking->stages->latitude); ?>
+
 <!-- Id Field -->
 <div class="form-group">
     {!! Form::label('id', 'Id:') !!}
@@ -37,7 +99,13 @@
 <!-- Stages Id Field -->
 <div class="form-group">
     {!! Form::label('stages_id', 'Stages Id:') !!}
-    <p>{!! $parking->stages_id !!}</p>
+    <p>Name : {!! $parking->stages->name !!}</p>
+    <p>Addres : {!! $parking->stages->address !!}</p>
+    <p>Locality : {!! $parking->stages->locality !!}</p>
+    <p>Province : {!! $parking->stages->province !!}</p>
+    <p>State : {!! $parking->stages->state !!}</p>
+    <p>Latitude : {!! $parking->stages->latitude !!}</p>
+    <p>Longitude : {!! $parking->stages->longitude !!}</p>
 </div>
 
 <!-- State Field -->
@@ -63,4 +131,3 @@
     {!! Form::label('deleted_at', 'Deleted At:') !!}
     <p>{!! $parking->deleted_at !!}</p>
 </div>
-
