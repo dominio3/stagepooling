@@ -44,7 +44,7 @@ class Reservation extends Model
     use SoftDeletes;
 
     public $table = 'reservations';
-    
+
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
@@ -56,7 +56,8 @@ class Reservation extends Model
         'reservation_code',
         'parkings_id',
         'vehicules_id',
-        'state'
+        'state',
+        'users_id'
     ];
 
     /**
@@ -69,7 +70,9 @@ class Reservation extends Model
         'reservation_code' => 'string',
         'parkings_id' => 'integer',
         'vehicules_id' => 'integer',
-        'state' => 'string'
+        'state' => 'string',
+        'users_id' => 'integer'
+
     ];
 
     /**
@@ -78,9 +81,15 @@ class Reservation extends Model
      * @var array
      */
     public static $rules = [
-        
-    ];
 
+    ];
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     **/
+    public function user()
+    {
+        return $this->belongsTo(\App\Models\User::class);
+    }
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      **/

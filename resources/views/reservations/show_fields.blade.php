@@ -45,4 +45,3 @@
     {!! Form::label('deleted_at', 'Deleted At:') !!}
     <p>{!! $reservation->deleted_at !!}</p>
 </div>
-

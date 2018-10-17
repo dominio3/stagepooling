@@ -25,7 +25,10 @@
     {!! Form::label('state', 'State:') !!}
     {!! Form::select('state', $states ,  null, ['class' => 'form-control']) !!}
 </div-->
-
+<!-- Users Id Field -->
+<div class="form-group col-sm-6">
+    {!! Form::number('users_id', Auth::user()->id , ['class' => 'form-control hidden']) !!}
+</div>
 <!-- Submit Field -->
 <div class="form-group col-sm-12">
     {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
