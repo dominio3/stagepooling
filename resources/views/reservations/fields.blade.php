@@ -5,9 +5,13 @@
 </div>
 
 <!-- Parkings Id Field -->
+
+    {!! Form::text('parkings_id', $parking_id->id, ['id'=>'select-parkings' , 'class' => 'form-control hidden']) !!}
+
+<!-- Parkings Id Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('parkings_id', 'Parkings Id:') !!}
-    {!! Form::text('parkings_id', $parking_id->parking_code, ['id'=>'select-parkings' , 'class' => 'form-control' ]) !!}
+    {!! Form::text('parkings_code', $parking_id->parking_code,  ['id'=>'select-parkings' , 'class' => 'form-control' , 'disabled']) !!}
 </div>
 
 <!-- Vehicules Id Field -->

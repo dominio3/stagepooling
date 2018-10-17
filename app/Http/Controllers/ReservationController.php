@@ -46,7 +46,7 @@ class ReservationController extends AppBaseController
     {
 
         $states = ([ 'Activa' => 'Activa' , 'Finalizada' =>'Finalizada' ]);
-        //$parkings = Parking::pluck('parking_code' , 'id');
+        $parkings = Parking::pluck('parking_code' , 'id');
         $vehicules = Vehicule::where('users_id','=', Auth::user()->id)->pluck('patent' , 'id');
         $codigo = $this->generarCodigo();
         $parking_id =  Parking::find($p);
