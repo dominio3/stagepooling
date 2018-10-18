@@ -131,44 +131,70 @@
         </div>
     </div>
 
-
-
-
-
-
-
-      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAf394KU3zoLLWVfGlhMRJNFLU-1tZINQA&callback=initMap" async
+      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAqvp2UBgVch-Mk7pT64-l3ks9Kfa4uOus&callback=initMap" async
           defer></script>
-
-
-
       <div id="map" style="width: 100%; height: 388px"></div>
 
   </div>
+
       <script type="text/javascript">
 
-      function addMarker(data) {
-          new google.maps.Marker({
-              position: new google.maps.LatLng(data.lat, data.lng),
-              map: map
-          });
-      }
+      var map, markers = [], infowindow;
+
       function initMap()
       {
-          map = new google.maps.Map(document.getElementById('map'), {
-              center: {
-                  lat: -34.6157437,
-                  lng: -58.5733832,
-              },
-              zoom: 8
-          })
-          @foreach ($parking as $par)
-          var marker = {
-            lat: {{ $par->stage_latitude}},
-            lng: {{ $par->stage_longitude}}
-          };
-          addMarker(marker);
-          @endforeach
-      }
-      </script>
+        map = new google.maps.Map(document.getElementById('map'), {
+        center:
+         {
+          lat: -34.6157437,
+          lng: -58.5733832,
+          },
+        zoom: 8
+      })
+
+      infowindow = new google.maps.InfoWindow();
+      @foreach ($parking as $par)
+        var marker = {
+          text:
+           '<?php echo 'Address : ' .  $par->stage_address . '<br>Locality : ' . $par->stage_locality. '<br>State : ' . $par->stage_state
+            ?>',
+          lat: {{ $par->stage_latitude}},
+          lng: {{ $par->stage_longitude}}
+        };
+        markers.push(addMarker(marker));
+      @endforeach
+}
+function addMarker(data) {
+    var marker = new google.maps.Marker({
+        position: new google.maps.LatLng(data.lat, data.lng),
+        map: map,
+        icon: data.icon
+    });
+
+    var html = "<b>" + data.text + "</b> <br/>"; //html del infowindow
+    bindInfoWindow(marker, html); //creamos el infowindow
+    return marker;
+
+
+    /**marker.addListener('click', function() {
+        console.log(marker.getPosition().lat());
+        console.log(marker.getPosition().lng());
+    });
+    return marker;*/
+}
+/**
+ *
+ * función que permite añadir infowindows
+ *
+ * @param marker
+ * @param html
+ */
+function bindInfoWindow(marker, html) {
+    google.maps.event.addListener(marker, 'click', function (event) {
+        infowindow.setContent(html);
+        infowindow.position = event.latLng;
+        infowindow.open(map, marker);
+    });
+}
+</script>
 @endsection
