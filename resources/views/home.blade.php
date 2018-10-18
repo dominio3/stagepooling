@@ -128,16 +128,23 @@
 
           </div>
           <!-- small box -->
-
         </div>
     </div>
 
 
 
 
+
+
+
       <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAf394KU3zoLLWVfGlhMRJNFLU-1tZINQA&callback=initMap" async
           defer></script>
-      <div id="map"></div>
+
+
+
+      <div id="map" style="width: 100%; height: 388px"></div>
+
+  </div>
       <script type="text/javascript">
 
       function addMarker(data) {
