@@ -69,6 +69,13 @@ class ReservationController extends AppBaseController
 
         Flash::success('Reservation saved successfully.');
 
+        Parking::
+            where('id', $request->parkings_id)
+            ->update(['state' => 'Ocupado']);
+        Vehicule::
+            where('id', $request->vehicules_id)
+            ->update(['state' => 'En Reserva']);
+
         return redirect(route('reservations.index'));
     }
 

@@ -85,10 +85,10 @@ class ParkingDataTable extends DataTable
     private function getColumns()
     {
         return [
+            'locality' => ['name' => 'stage_locality', 'data' => 'stage_locality'],
             'parking_code' => ['name' => 'parking_code', 'data' => 'parking_code'],
             'address' => ['name' => 'stage_address', 'data' => 'stage_address'],
             'province' => ['name' => 'stage_province', 'data' => 'stage_province'],
-            'locality' => ['name' => 'stage_locality', 'data' => 'stage_locality'],
             'date_init' => ['name' => 'date_init', 'data' => 'date_init'],
             'hour_init' => ['name' => 'hour_init', 'data' => 'hour_init'],
             'date_end' => ['name' => 'date_end', 'data' => 'date_end'],

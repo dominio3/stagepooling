@@ -61,9 +61,15 @@ class ParkingController extends AppBaseController
     {
         $input = $request->all();
 
+        //dd($request->all());
+
         $parking = $this->parkingRepository->create($input);
 
         Flash::success('Parking saved successfully.');
+
+        Stage::
+            where('id', $request->stages_id)
+            ->update(['state' => 'Inhabilitado']);
 
         return redirect(route('parkings.index'));
     }
