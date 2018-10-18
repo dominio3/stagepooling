@@ -31,16 +31,15 @@ class ReservationDataTable extends DataTable
         $reservations = Reservation::query()
                 ->join('parkings' , 'reservations.parkings_id' , '=' , 'parkings.id')
                 ->join('vehicules' , 'reservations.vehicules_id' , '=' , 'vehicules.id')
-                ->select('reservations.id','reservations.reservation_code as reservation_code',
-                         'reservations.id','reservations.state as state',
-                         'parkings.parking_code as parkings_code' ,
-                         'vehicules.patent as vehicules_patent',
+                ->select('parkings.parking_code as parkings_code',
                          'parkings.date_init as date_init',
                          'parkings.hour_init as hour_init',
                          'parkings.date_end as date_end',
-                         'parkings.hour_end as hour_end'
-                       )
-                 ->where('reservations.users_id','=',Auth::user()->id);
+                         'parkings.hour_end as hour_end',
+                         'vehicules.patent as vehicules_patent',
+                         'reservations.id','reservations.reservation_code as reservation_code',
+                         'reservations.state as state')
+                ->where('reservations.users_id','=',Auth::user()->id);
 
         return $this->applyScopes($reservations);
     }

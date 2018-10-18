@@ -2,12 +2,10 @@
 
 @section('content')
 
-<?php //dd($parking) ?>
+<?php// dd($parking) ?>
 
-<div class="container">
-    <div class="row">
 
-      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDUV3uA9XdReJdTxIGQsnTd7BhMrB4RdNk&callback=initMap" async
+      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAf394KU3zoLLWVfGlhMRJNFLU-1tZINQA&callback=initMap" async
           defer></script>
       <div id="map"></div>
 
@@ -32,14 +30,15 @@
 
           })
 
-          @for ($i = 0; $i < 5; $i++)
+          @foreach ($parking as $par)
           var marker = {
-            lat: {{ $parking[$i]->stages_id}},
-            lng: {{ $parking[$i]->stages_id}}
+            lat: {{ $par->stage_latitude}},
+            lng: {{ $par->stage_longitude}}
           };
-
           addMarker(marker);
-          @endfor
+          @endforeach
+
+
 
 
 
@@ -48,7 +47,4 @@
 
       </script>
 
-
-    </div>
-</div>
 @endsection

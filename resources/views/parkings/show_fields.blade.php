@@ -2,7 +2,7 @@
 <!--maps-->
 
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDUV3uA9XdReJdTxIGQsnTd7BhMrB4RdNk&callback=initMap" async
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAf394KU3zoLLWVfGlhMRJNFLU-1tZINQA&callback=initMap" async
     defer></script>
 <div id="map"></div>
 
@@ -113,6 +113,7 @@ function initMap()
     {!! Form::label('state', 'State:') !!}
     <p>{!! $parking->state !!}</p>
 </div>
+
 
 <!-- Created At Field -->
 <div class="form-group">

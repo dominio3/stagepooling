@@ -31,7 +31,7 @@
 <!-- State Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('state', 'State:') !!}
-    {!! Form::select('state', $states ,  null, ['class' => 'form-control']) !!}
+    {!! Form::select('state', $states ,  null , ['class' => 'form-control', 'placeholder' => 'Seleccione Estado']) !!}
 </div>
 
 <!-- Observation Field -->

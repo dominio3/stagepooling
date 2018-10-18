@@ -16,7 +16,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $parking = Parking::all();
+        $parking = Parking::join('stages' , 'parkings.stages_id' , '=' , 'stages.id')
+                        ->select('stages.latitude  as stage_latitude' ,
+                                 'stages.longitude  as stage_longitude')->get();
         return view('home')->with(compact($parking , 'parking'));
     }
 

@@ -40,7 +40,7 @@ class ParkingDataTable extends DataTable
                  'parkings.id','parkings.date_end as date_end',
                  'parkings.id','parkings.hour_end as hour_end',
                  'parkings.id','parkings.state as parking_state'
-               );//->where('users_id','!=',Auth::user()->id);
+               );//->where('parkings.state','=','Disponible')->where('parkings.users_id','!=',Auth::user()->id);
 
         return $this->applyScopes($parkings);
     }

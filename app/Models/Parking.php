@@ -65,7 +65,8 @@ class Parking extends Model
         'date_end',
         'hour_end',
         'stages_id',
-        'state'
+        'state',
+        'users_id'
     ];
 
     /**
@@ -81,7 +82,8 @@ class Parking extends Model
         'date_end' => 'date',
         'hour_end' => 'time',
         'stages_id' => 'integer',
-        'state' => 'string'
+        'state' => 'string',
+        'users_id' => 'integer'
     ];
 
     /**
@@ -113,4 +115,10 @@ class Parking extends Model
     {
         return $this->hasMany(\App\Models\Reservation::class);
     }
+
+    public function users()
+    {
+        return $this->belongsTo(\App\Models\User::class);
+    }
+
 }

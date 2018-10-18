@@ -101,7 +101,7 @@ class ParkingController extends AppBaseController
     public function edit($id)
     {
         $states = ([ 'Disponible' => 'Disponible' , 'Ocupado' =>'Ocupado' ]);
-        $stages = Stage::where('users_id','=',Auth::user()->id)->pluck('name' , 'id');
+        $stages = Stage::pluck('name' , 'id');//where('users_id','=',Auth::user()->id)->
         $parking = $this->parkingRepository->findWithoutFail($id);
         $codigo = $parking->codigo;
 

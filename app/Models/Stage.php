@@ -135,7 +135,7 @@ class Stage extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      **/
-    public function user()
+    public function users()
     {
         return $this->belongsTo(\App\Models\User::class);
     }

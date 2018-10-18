@@ -1,6 +1,15 @@
 
-#map {
-    height: 300px;
-    position: relative;
-    width: 50%;
+
+#map{
+  height:80px;
+  width: 100%;
+  background-color: red;
+
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left:0;
+  width: 1500px;
+  border: 3px solid #73AD21;
+
 }
