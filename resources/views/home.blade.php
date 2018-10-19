@@ -156,8 +156,8 @@
       @foreach ($parking as $par)
         var marker = {
           text:
-           '<?php echo 'Address : ' .  $par->stage_address . '<br>Locality : ' . $par->stage_locality. '<br>State : ' . $par->stage_state
-            ?>',
+           '<?php echo 'Parking Code : ' . $par->parking_code . '<br>Address : ' .  $par->stage_address . '<br>Locality : ' . $par->stage_locality. '<br>State : ' . $par->stage_state .'<br><a href="'. url('reservations/create/' . $par->id) .'">Reserve</a>' ?>',
+
           lat: {{ $par->stage_latitude}},
           lng: {{ $par->stage_longitude}}
         };

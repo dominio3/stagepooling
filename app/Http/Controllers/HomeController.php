@@ -21,7 +21,9 @@ class HomeController extends Controller
                                  'stages.longitude  as stage_longitude',
                                  'stages.address  as stage_address',
                                  'stages.locality  as stage_locality',
-                                 'stages.state  as stage_state')->get();
+                                 'stages.state  as stage_state',
+                                 'parkings.id as id',
+                                 'parkings.parking_code as parking_code')->get();
         return view('home')->with(compact($parking , 'parking'));
     }
 

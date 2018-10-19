@@ -34,24 +34,6 @@ function initMap()
 
         addMarker(marker);
 
-        var marker = {
-          lat: <?php  echo $parking->stages->latitude; ?>,
-          lng: <?php  echo $parking->stages->longitude; ?>
-        };
-
-        addMarker(marker);
-        var marker = {
-          lat: <?php  echo $parking->stages->latitude; ?>,
-          lng: <?php  echo $parking->stages->longitude; ?>
-        };
-
-        addMarker(marker);
-        var marker = {
-          lat: <?php  echo $parking->stages->latitude; ?>,
-          lng: <?php  echo $parking->stages->longitude; ?>
-        };
-
-        addMarker(marker);
 }
 
 
