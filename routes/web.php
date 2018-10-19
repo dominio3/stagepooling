@@ -11,6 +11,10 @@ Route::get('/maps', function () {
 
 Route::get('/reservations/create/{p}','ReservationController@create');
 
+Route::get('profile', 'UserController@profile');
+
+Route::post('profile' , 'UserController@updatePhoto');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');

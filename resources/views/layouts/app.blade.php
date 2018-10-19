@@ -50,11 +50,11 @@
                           @php
                           if(empty(Auth::user()->photo))
                             {
-                              $image = url('/uploads/foto/default.jpg');
+                              $image = url('/uploads/photo/default.jpg');
                             }
                           else
                             {
-                              $image =  url('/uploads/foto/'.  Auth::user()->photo);
+                              $image =  url('/uploads/photo/'.  Auth::user()->photo);
 
                             }
                           @endphp
@@ -78,7 +78,7 @@
                             <!-- Menu Footer-->
                             <li class="user-footer">
                                 <div class="pull-left">
-                                    <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                    <a href="{!! url('/profile') !!}" class="btn btn-default btn-flat">Profile</a>
                                 </div>
                                 <div class="pull-right">
                                     <a href="{!! url('/logout') !!}" class="btn btn-default btn-flat"

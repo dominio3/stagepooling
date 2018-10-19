@@ -11,6 +11,11 @@ use Flash;
 use App\Http\Controllers\AppBaseController;
 use Response;
 
+use Illuminate\Http\Request;
+use Auth;
+use Image;
+
+
 class UserController extends AppBaseController
 {
     /** @var  UserRepository */
@@ -151,4 +156,21 @@ class UserController extends AppBaseController
 
         return redirect(route('users.index'));
     }
+    public function profile()
+    {
+        return view('profile', array('user' => Auth::user()) );
+    }
+
+    public function updatePhoto(Request $request)
+    {
+       if($request->hasFile('photo')){
+         $photo = $request->file('photo');
+         $filename = time() . '.' . $photo->getClientOriginalExtension();
+         Image::make($photo)->resize(300, 300)->save( public_path('./uploads/photo/' . $filename ) );
+         $user = Auth::user();
+         $user->photo = $filename;
+         $user->save();
+    }
+     return view('profile', array('user' => Auth::user()) );
+   }
 }

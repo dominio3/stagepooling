@@ -12,6 +12,7 @@
         "infyomlabs/adminlte-templates": "5.4.x-dev",
         "infyomlabs/laravel-generator": "5.4.x-dev",
         "infyomlabs/swagger-generator": "dev-master",
+        "intervention/image": "^2.4",
         "jlapp/swaggervel": "dev-master",
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",

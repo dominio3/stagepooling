@@ -9,11 +9,11 @@
             @php
             if(empty(Auth::user()->photo))
               {
-                $image = url('/uploads/foto/default.jpg');
+                $image = url('/uploads/photo/default.jpg');
               }
             else
               {
-                $image =  url('/uploads/foto/'.  Auth::user()->photo);
+                $image =  url('/uploads/photo/'.  Auth::user()->photo);
 
               }
             @endphp

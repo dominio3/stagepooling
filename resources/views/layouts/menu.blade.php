@@ -1,4 +1,8 @@
 
+<li class="{{ Request::is('home') ? 'active' : '' }}">
+    <a href="{!! url('/home') !!}"><i class="fa fa-home text-light-blue"></i><span>Home</span></a>
+</li>
+
 <li class="{{ Request::is('parkings*') ? 'active' : '' }}">
     <a href="{!! route('parkings.index') !!}"><i class="fa fa-location-arrow text-light-blue"></i><span>Parkings</span></a>
 </li>
