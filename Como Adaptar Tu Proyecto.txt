@@ -308,3 +308,15 @@ Route::get('profile', 'UserController@profile');
 
 Route::post('profile' , 'UserController@updatePhoto');
 --------------------------------------------------------------------------------
+
+poner icono de fecha y hora en los formularios
+<!-- Date Init Field -->
+<div class="form-group col-sm-6">
+  {!! Form::label('date_init', 'Date Init:') !!}
+  <div class="input-group">
+    <div class="input-group-addon">
+      <i class="fa fa-calendar"></i>
+    </div>
+    {!! Form::date('date_init', $parking->date_init,  ['class' => 'form-control']) !!}
+  </div>
+</div>

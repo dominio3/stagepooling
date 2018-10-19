@@ -1,7 +1,12 @@
 <!-- Reservation Code Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('reservation_code', 'Reservation Code:') !!}
+    <div class="input-group">
+      <div class="input-group-addon">
+        <i class="fa fa-qrcode"></i>
+      </div>
     {!! Form::text('reservation_code',$codigo ,  ['class' => 'form-control']) !!}
+    </div>
 </div>
 
 <!-- Parkings Id Field -->
@@ -11,14 +16,26 @@
 <!-- Parkings Id Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('parkings_id', 'Parkings Id:') !!}
+    <div class="input-group">
+      <div class="input-group-addon">
+        <i class="fa fa-qrcode"></i>
+      </div>
     {!! Form::text('parkings_code', $parking_id->parking_code,  ['id'=>'select-parkings' , 'class' => 'form-control' , 'disabled']) !!}
+    </div>
 </div>
 
 <!-- Vehicules Id Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('vehicules_id', 'Vehicules Id:') !!}
+    <div class="input-group">
+      <div class="input-group-addon">
+        <i class="fa fa-car"></i>
+      </div>
     {!! Form::select('vehicules_id', $vehicules, null, ['class' => 'form-control']) !!}
+    </div>
 </div>
+
+
 
 <!-- State Field -->
 <!--div class="form-group col-sm-6">

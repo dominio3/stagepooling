@@ -61,7 +61,7 @@
           <!-- icon -->
           <div class="icon">
 
-            <i class="fa fa-contao"></i>
+            <i class="fa fa-flag"></i>
 
           </div>
           <!-- icon -->

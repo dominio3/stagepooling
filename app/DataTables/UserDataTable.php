@@ -78,7 +78,7 @@ class UserDataTable extends DataTable
             //'remember_token' => ['name' => 'remember_token', 'data' => 'remember_token'],
             'mobile' => ['name' => 'mobile', 'data' => 'mobile'],
             'role' => ['name' => 'role', 'data' => 'role'],
-            'photo' => ['name' => 'photo', 'data' => 'photo' , 'render' => '"<img src=\""+data+"\" height=\"50\"/>"']
+            'photo' => ['name' => 'photo', 'data' => 'photo' , 'render' => '"<img src=\"./uploads/photo/"+data+"\" height=\"50\"/>"']
         ];
     }
 

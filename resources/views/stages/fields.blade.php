@@ -1,13 +1,23 @@
 <!-- Name Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('name', 'Name:') !!}
+    <div class="input-group">
+      <div class="input-group-addon">
+        <i class="fa fa-tag"></i>
+      </div>
     {!! Form::text('name', null, ['class' => 'form-control']) !!}
+    </div>
 </div>
 
 <!-- Address Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('address', 'Address:') !!}
+    <div class="input-group">
+      <div class="input-group-addon">
+        <i class="fa fa-map-pin"></i>
+      </div>
     {!! Form::text('address', null, ['class' => 'form-control']) !!}
+  </div>
 </div>
 
 <!-- Locality Field -->
@@ -31,19 +41,34 @@
 <!-- Latitude Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('latitude', 'Latitude:') !!}
+    <div class="input-group">
+      <div class="input-group-addon">
+        <i class="fa fa-map-marker"></i>
+      </div>
     {!! Form::text('latitude', null, ['class' => 'form-control']) !!}
+    </div>
 </div>
 
 <!-- Longitude Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('longitude', 'Longitude:') !!}
+    <div class="input-group">
+      <div class="input-group-addon">
+        <i class="fa fa-map-marker"></i>
+      </div>
     {!! Form::text('longitude', null, ['class' => 'form-control']) !!}
+    </div>
 </div>
 
 <!-- Observation Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('observation', 'Observation:') !!}
+    <div class="input-group">
+      <div class="input-group-addon">
+        <i class="fa fa-binoculars"></i>
+      </div>
     {!! Form::text('observation', null, ['class' => 'form-control']) !!}
+      </div>
 </div>
 
 <!-- Photo Field -->

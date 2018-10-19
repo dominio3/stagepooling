@@ -25,3 +25,6 @@
     </div>
 </div>
 @endsection
+
+
+./uploads/photo/1539972344.png
