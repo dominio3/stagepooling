@@ -50,12 +50,12 @@
                           @php
                           if(empty(Auth::user()->photo))
                             {
-                              $image = "./uploads/foto/default.jpg";
+                              $image = url('/uploads/foto/default.jpg');
                             }
                           else
                             {
-                              $image =  Auth::user()->photo;
-                              
+                              $image =  url('/uploads/foto/'.  Auth::user()->photo);
+
                             }
                           @endphp
 
