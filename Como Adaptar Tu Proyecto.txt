@@ -12,19 +12,19 @@ agregamos timestamps a las tablas
 
 class Timestamps extends Migration
 {
- 
+
    public function up()
-    
+
 {
 
         Schema::table('nombre_tabla' , function( Blueprint $table ){
 
           $table->timestamps();
-          
+
 	  $table->timestamp('deleted_at')->nullable();
 
         });
-    
+
 }
 
 ejecutamos : php artisan migrate
@@ -37,9 +37,9 @@ php artisan vendor:publish --tag=datatables-buttons
 		Que debemos cambiar para que todo funcione?
 -----------------------------------------------------------------------------------
 
-				En Modelo : 
+				En Modelo :
 
-Rules para validar que los campos no queden vacios : 
+Rules para validar que los campos no queden vacios :
 
     public static $rules = [
 
@@ -63,10 +63,10 @@ public function userSus()
         return $this->belongsTo(\App\Models\User::class , 'usuarioCierre');
     }
 
-definicion de Relaciones con belongTo ( 
+definicion de Relaciones con belongTo (
 
     public function jurados()
-    
+
 {
         return $this->belongsToMany(\App\Models\Jurado::class, 'concursosjurados');
 
@@ -87,32 +87,32 @@ definicion de Relaciones con belongTo (
 
     }
     public function edit($id)
-    
+
     {
-        
+
 	$institutos = Instituto::pluck('nombre' , 'id') ;
 
-        
+
 	$carrera = $this->carreraRepository->findWithoutFail($id);
 
-        
+
 	if (empty($carrera)) {
-            
+
 	Flash::error('Carrera not found');
 
-            
+
 	return redirect(route('carreras.index', compact('institutos')));
-        
+
 	}
 
-        
+
 	return view('carreras.edit' , compact('institutos'))->with('carrera', $carrera);
-    
+
 }
 
 				En las vistas
 
-En fields.blade.php 
+En fields.blade.php
 
 <div class="form-group col-sm-6">
 
@@ -151,17 +151,17 @@ ej.
     Area : {!! $concursoPostulante->concurso->asignatura->area->nombre !!} <br>
 
     Estado del Concurso : {!! $concursoPostulante->concurso->estado !!}
-    
+
 </p>
 </div>
 
 
 
-Cómo personalizar el correo de recuperación de contraseñas en Laravel 5.3 y 5.4
+Cï¿½mo personalizar el correo de recuperaciï¿½n de contraseï¿½as en Laravel 5.3 y 5.4
 
 https://styde.net/como-personalizar-el-correo-de-recuperacion-de-contrasenas-en-laravel-5-3-y-5-4/
 
-solucionar puerto y url de redireccion 
+solucionar puerto y url de redireccion
 
 https://stackoverflow.com/questions/44880486/replace-localhost-with-real-domain-name-in-reset-password-of-laravel-5
 
@@ -182,7 +182,7 @@ https://rimorsoft.com/generar-reportes-pdf-en-laravel-5-5
 -----------------------------------------------------------------------------------------------------------------
 				RELACIONES EN DATATABLES QUERY()->JOIN()->SELECT
 -----------------------------------------------------------------------------------------------------------------
-TABLA1 = LA TABLA QUE TIENE LA FK 
+TABLA1 = LA TABLA QUE TIENE LA FK
 TABLA2 = LA TABLA QUE TIENE LA PK
 
 
@@ -190,14 +190,14 @@ $VARIABLE = MODELO::query()->JOIN('TABLA2','TABLA1.FK','=','TABLA2.id')->SELECT(
 
 
 private function getColumns()
- 
+
 	{
 
-        
+
 		return [
-            
+
 		'CABECERATABLA1' => ['name' => 'TABLA1.CAMPO', 'data' => 'ALIAS'],
-            	'CABECERATABLA2' => ['name' => 'TABLA2.CAMPO', 'data' => 'ALIAS' 
+            	'CABECERATABLA2' => ['name' => 'TABLA2.CAMPO', 'data' => 'ALIAS'
 		]
 
 
@@ -208,33 +208,33 @@ private function getColumns()
 
 EJEMPLO:
   public function query()
-    
+
 	{
-        
+
 		$carreras = Carrera::query()->join('institutos','carreras.instituto_id','=','institutos.id')
-			  
+
                   ->select(['carreras.id' , 'carreras.nombre as carr_nom', 'institutos.nombre as ins_nom']);
-	
+
 
         return $this->applyScopes($carreras);
-    
+
 	}
 
-    
+
 
  	/*$posts = DB::table('posts')->join('users', 'posts.user_id', '=', 'users.id')
-            
+
 			->select(['posts.id', 'posts.title', 'users.name', 'users.email', 'posts.created_at', 'posts.updated_at']);*/
 
 
 
     private function getColumns()
-    
+
 	{
 
-        
+
 		return [
-            
+
 		'Carrera' => ['name' => 'carreras.nombre', 'data' => 'carr_nom'],
             	'Instituto' => ['name' => 'institutos.nombre', 'data' => 'ins_nom']
 
@@ -244,5 +244,67 @@ EJEMPLO:
 
        }
 
+-------------------------------------------------------------------------------
+Como poner fotos en profile
+$ composer require intervention/image
+en config/app.php
+en provider:
+Intervention\Image\ImageServiceProvider::class,
+en Alias:
+'Image' => Intervention\Image\Facades\Image::class,
 
 
+en usercontroller.PHP
+llamamos a use :
+use Illuminate\Http\Request;
+use Auth;
+use Image;
+
+abajo ponmos estos dos metodos
+}
+public function profile()
+{
+		return view('profile', array('user' => Auth::user()) );
+}
+
+public function updatePhoto(Request $request)
+{
+	 if($request->hasFile('photo')){
+		 $photo = $request->file('photo');
+		 $filename = time() . '.' . $photo->getClientOriginalExtension();
+		 Image::make($photo)->resize(300, 300)->save( public_path('./uploads/photo/' . $filename ) );
+		 $user = Auth::user();
+		 $user->photo = $filename;
+		 $user->save();
+}
+ return view('profile', array('user' => Auth::user()) );
+}
+
+creamos la vista profile.blade.PHP con el siguiente codigo:
+@extends('layouts.app')
+
+@section('content')
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <img src="./uploads/photo/{{ $user->photo }}" style="width:150px; height:150px; float:left; border-radius:50%; margin-right:25px;">
+            <h2>{{ $user->name }}'s Profile</h2>
+            <form enctype="multipart/form-data" action="{{ url('/profile') }}" method="POST">
+                <label>Update Profile Image</label>
+                <input type="file" name="photo">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                <input type="submit" class="pull-right btn btn-sm btn-primary">
+            </form>
+        </div>
+    </div>
+</div>
+@endsection
+
+y luego en las rutas web.php:
+
+Route::get('profile', 'UserController@profile');
+
+Route::post('profile' , 'UserController@updatePhoto');
+--------------------------------------------------------------------------------
